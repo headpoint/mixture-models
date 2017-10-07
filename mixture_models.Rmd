@@ -1,0 +1,77 @@
+---
+title: "Mixture Models"
+author: "Suren Rathnayake"
+date: "7 October 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Finite Mixture Models
+Mixture models are used in many areas for clustering of data.
+With mixutre models, clustering is done by estimating the density
+of the data using a mixutre of component densities.
+These components corresponds to the clusters in the data.
+In mathematical form, mixture model estimates the density of a 
+$p$-dimensional observation as,
+$$ f(\mathbf{y}; \Psi) = \sum_{i = 1}^g \pi_i f_i (\mathbf{y} | \mathbf{\theta}_i), \qquad \textrm{for} \, (i = 1, \dots, g),$$
+where $f_i$'s are the component density functions, 
+parameterised by $\theta_i$, and $\pi_i$ are the mixture proportions
+with $\sum_i^g \pi_i = 1$. $\mathbf{\Psi}$ contain the 
+paramters $\mathbf{\theta}_i$ ($i = 1, \dots, g$) and
+$\pi_i$ ($i = 1, \dots, n-1$).
+
+
+Usually, $f_i$ are taken to be from the same familiy of multivariate
+distributions. 
+Mixutre models with components from the familiy of
+normal / Gaussian are usually called Gaussian mixute models or
+GMMs.
+The paramaters $\mathbf{\theta}_i$  for a normal
+distribution include the mean ($\mathbf{\mu}$) and
+$\mathbf{\Sigma}$.
+
+
+# Clustering Using Mixture Models
+
+There are a number of `R` packages exists for fitting 
+mixutre models. Some of these include
+`EMMIX`, `mixtools`, among others.
+
+The Iris data is used a lot in demosntrating clustering algorithms.
+This data contain measurements in centimeters of the variables 
+sepal length and width and petal length and width, respectively, 
+for 50 flowers from each of 3 species of iris. 
+The species are Iris setosa, versicolor, and virginica.
+
+```{r, message=FALSE, warning=FALSE}
+require(ggplot2)
+require(GGally)
+ggpairs(iris, columns = 1:4, aes(colour = Species))
+```
+
+## EMMIX
+With **EMMIX** we can use following to 
+```{r, message=FALSE, warning=FALSE, results='hide'}
+library(EMMIX)
+fit <- EMMIX(dat = iris[, -5], g = 3)
+```
+
+By default, **EMMIX** fits mixture of normals to
+data.  
+The output of EMMIX, contain
+the estimates $\pi_i$, $\mathbf{\mu}_i$ and $\mathbf{\Sigma}_i$
+are given in `fit$pro`, `fit$mu` and `fit$sigma`, respectively,
+as well as criteria for model selection. 
+
+
+
+
+
+
+
+
+
+
