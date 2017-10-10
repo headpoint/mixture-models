@@ -49,7 +49,7 @@ The species are Iris setosa, versicolor, and virginica.
 ```{r, message=FALSE, warning=FALSE}
 require(ggplot2)
 require(GGally)
-ggpairs(iris, columns = 1:4, aes(colour = Species))
+ggpairs(iris, columns = 1:4, aes(colour = Species), size = 3)
 ```
 
 ## EMMIX
@@ -66,8 +66,21 @@ the estimates $\pi_i$, $\mathbf{\mu}_i$ and $\mathbf{\Sigma}_i$
 are given in `fit$pro`, `fit$mu` and `fit$sigma`, respectively,
 as well as criteria for model selection. 
 
+Given that we are already know the classification of 
+the Iris species in the data, we can check how 
+good the clustering is by comparing the implied 
+clustering with those. The adjusted Rand Index is a 
+good choise for this, but here we can juse use a 
+confuction matrix simply using the `table` function in R.
+```{r}
+table(fit$clust, iris[, 5])
+```
 
-
+We can also observe the clustering in a paired plot.
+```{r, message=FALSE, warning=FALSE}
+df <- data.frame(iris, clust = factor(fit$clust))
+ggpairs(df, columns = 1:4, aes(colour = clust))
+```
 
 
 
