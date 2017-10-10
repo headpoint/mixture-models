@@ -88,3 +88,5 @@ ggpairs(df, columns = 1:4, aes(colour = clust))
 
 
 
+
+
