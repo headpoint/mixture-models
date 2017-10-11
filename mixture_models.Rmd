@@ -49,7 +49,9 @@ The species are Iris setosa, versicolor, and virginica.
 ```{r, message=FALSE, warning=FALSE}
 require(ggplot2)
 require(GGally)
-ggpairs(iris, columns = 1:4, aes(colour = Species), size = 3)
+ggpairs(iris, columns = 1:4, 
+        upper = list(continuous = "density", combo = "box_no_facet"),
+        aes(colour = Species), size = 3)
 ```
 
 ## EMMIX
@@ -79,7 +81,9 @@ table(fit$clust, iris[, 5])
 We can also observe the clustering in a paired plot.
 ```{r, message=FALSE, warning=FALSE}
 df <- data.frame(iris, clust = factor(fit$clust))
-ggpairs(df, columns = 1:4, aes(colour = clust))
+ggpairs(df, columns = 1:4, 
+        upper = list(continuous = "density", combo = "box_no_facet"),
+        aes(colour = clust))
 ```
 
 
