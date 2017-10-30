@@ -97,6 +97,6 @@ mixture proportions.
 plot_contous(fit)
 ```
 
-![Contours using the fitted mixture model parameters.](plot.png)
+![Contours using the fitted mixture model parameters.](https://github.com/headpoint/misc/plot.png)
 
 Plotting the density estimates
